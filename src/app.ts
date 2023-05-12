@@ -9,6 +9,15 @@ const app: Application = express()
 app.use(cors())
 // parse data
 app.use(express.json())
+
+app.use(express.urlencoded({ extended: true }))
+app.use('/api/v1/user', userRoute)
+app.use('/api/v1/products', productRoute)
+app.get('/', (req, res) => {
+	res.send('app running')
+})
+export default app
+
 // inserting a test data into mongodb
 /**
  * step 1: create interface
@@ -16,12 +25,6 @@ app.use(express.json())
  * step 3: model
  * step 4: database query
  *   */
-app.use(express.urlencoded({ extended: true }))
-// app.get('/api/v1/user', userRoute)
-// app.get('/api/v1/products', productRoute)
-app.use('/api/v1/user', userRoute)
-app.use('/api/v1/products', productRoute)
-export default app
 
 // pattern -> (MCV-> Model view controller) & Modular
 /**
