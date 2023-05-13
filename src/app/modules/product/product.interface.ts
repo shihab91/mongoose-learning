@@ -21,3 +21,6 @@ export interface IProduct {
 		content: string
 	}[]
 }
+export interface IProductMethods {
+	getBrandDetails(): IProductBrand
+}

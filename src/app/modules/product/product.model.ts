@@ -1,7 +1,9 @@
-import { Schema, model } from 'mongoose'
-import { IProduct } from './product.interface'
+import { Model, Schema, model } from 'mongoose'
+import { IProduct, IProductMethods } from './product.interface'
 
-const productSchema = new Schema<IProduct>({
+type ProductModel = Model<IProduct, {}, IProductMethods>
+
+const productSchema = new Schema<IProduct, ProductModel, IProductMethods>({
 	id: { type: Number, required: true },
 	name: { type: String, required: true },
 	description: { type: String, required: true },
@@ -25,4 +27,8 @@ const productSchema = new Schema<IProduct>({
 		},
 	],
 })
-export const Product = model<IProduct>('Product', productSchema)
+productSchema.method('getBrandDetails', function getBrandDetails() {
+	return this.brand
+})
+
+export const Product = model<IProduct, ProductModel>('Product', productSchema)
