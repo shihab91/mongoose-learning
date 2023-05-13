@@ -1,14 +1,16 @@
-import { Schema, model } from 'mongoose'
-import { IUser } from './user.interface'
+import { Model, Schema, model } from 'mongoose'
+import { IUser, IUserMethods } from './user.interface'
 
-const userSchema = new Schema<IUser>({
+type UserModel = Model<IUser, {}, IUserMethods>
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
 	id: { type: String, required: true, unique: true },
 	role: { type: String, required: true },
 	password: { type: String, required: true },
 	name: {
 		firstName: { type: String, required: true },
 		middleName: { type: String },
-		lastName: { type: String, requried: true },
+		lastName: { type: String, required: true },
 	},
 	dateOfBirth: { type: String },
 	gender: { type: String, enum: ['male', 'female'] },
@@ -18,4 +20,8 @@ const userSchema = new Schema<IUser>({
 	presentAddress: { type: String, required: true },
 	permanentAddress: { type: String, required: true },
 })
-export const User = model<IUser>('User', userSchema)
+userSchema.method('fullName', function fullName() {
+	return this.name.firstName + ' ' + this.name.lastName
+})
+export const User = model<IUser, UserModel>('User', userSchema)
+// instance methods -> instance er methods

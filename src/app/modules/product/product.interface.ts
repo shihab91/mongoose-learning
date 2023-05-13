@@ -1,3 +1,8 @@
+interface IProductBrand {
+	id: number
+	name: string
+	logo: string
+}
 export interface IProduct {
 	id: number
 	name: string
@@ -8,11 +13,7 @@ export interface IProduct {
 		id: number
 		name?: string
 	}
-	brand: {
-		id: number
-		name: string
-		logo: string
-	}
+	brand: IProductBrand
 	reviews: {
 		id: number
 		author: string
