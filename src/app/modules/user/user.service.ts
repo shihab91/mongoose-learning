@@ -16,3 +16,7 @@ export const getUserByIdFromDb = async (payload: string): Promise<IUser | null> 
 	const user = await User.findOne({ id: payload }, { contactNo: 0 })
 	return user
 }
+export const getAdminUsersFromDb = async () => {
+	const admins = await User.getAdminUsers()
+	return admins
+}
