@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from 'express'
+import express, { Application } from 'express'
 import cors from 'cors'
 // application routes
 import userRoute from './app/modules/user/user.route'
@@ -11,6 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
+// routes
 app.use('/api/v1/user', userRoute)
 app.use('/api/v1/products', productRoute)
 app.get('/', (req, res) => {

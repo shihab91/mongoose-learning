@@ -5,7 +5,6 @@ export const createUserToDb = async (payload: IUser): Promise<IUser> => {
 	const user = new User(payload) // User -> class & user -> instance of User class indeed and object
 	console.log(user.fullName())
 	await user.save() // user.save() -> built in instance method
-	// custom instance methods
 	return user
 }
 export const getUserFromDb = async (): Promise<IUser[]> => {

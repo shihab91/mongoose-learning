@@ -23,7 +23,6 @@ userSchema.method('fullName', function fullName() {
 })
 userSchema.static('getAdminUsers', async function getAdminUsers() {
 	const admins = await this.find({ role: 'admin' })
-
 	return admins
 })
 export const User = model<IUser, UserModel>('User', userSchema)
